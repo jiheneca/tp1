@@ -1,121 +1,174 @@
-#include "Wire.h"
 
-#define I2C_DEV_ADDR 0x55
+#include <WiFi.h>
+#include <PubSubClient.h>
 
-// =====================================
-// TABLE DES CODES ERREUR
-// =====================================
+// ===============================
+// WIFI
+// ===============================
 
-#define ERR_NONE              0
-#define ERR_WIFI_LOST         1
-#define ERR_SENSOR_DISCONNECT 2
-#define ERR_SENSOR_READ       3
-#define ERR_TEMP_LIMIT        4
-#define ERR_LOW_VOLTAGE       5
-#define ERR_SERIAL_LOST       6
-#define ERR_LOW_MEMORY        7
-#define ERR_I2C               8
-#define ERR_WATCHDOG           9
-#define ERR_UNKNOWN           10
-#define ERR_MQTT_LOST 11
+const char* ssid = "iot";
+const char* password = "iotisis;";
 
+// ===============================
+// MQTT
+// ===============================
 
-// =====================================
-// CORRESPONDANCE CODE / DESCRIPTION
-// =====================================
+const char* mqtt_server = "172.18.32.43";
 
-const char* getErrorMessage(uint8_t code) {
+WiFiClient espClient;
+PubSubClient client(espClient);
 
-  switch (code) {
+// ===============================
+// LED ET BOUTON
+// ===============================
 
-    case ERR_NONE:
-      return "Aucune erreur";
+#define LED_PIN 25
+#define BUTTON_PIN 26
 
-    case ERR_WIFI_LOST:
-      return "Perte du Wifi";
+// Topics MQTT
+const char* topicLED = "esp32/output";
+const char* topicButton = "esp32/button";
 
-    case ERR_SENSOR_DISCONNECT:
-      return "Capteur non connecte";
+// Gestion du bouton
+int lastButtonState = HIGH;
+int buttonState = HIGH;
 
-    case ERR_SENSOR_READ:
-      return "Erreur de lecture du capteur";
+unsigned long lastDebounceTime = 0;
+const unsigned long debounceDelay = 50;
 
-    case ERR_TEMP_LIMIT:
-      return "Temperature hors limites";
+// ===============================
+// RECEPTION MQTT
+// ===============================
 
-    case ERR_LOW_VOLTAGE:
-      return "Tension alimentation insuffisante";
+void callback(char* topic, byte* payload, unsigned int length) {
 
-    case ERR_SERIAL_LOST:
-      return "Perte communication serie";
+  String message = "";
 
-    case ERR_LOW_MEMORY:
-      return "Memoire insuffisante";
+  for (int i = 0; i < length; i++) {
+    message += (char)payload[i];
+  }
 
-    case ERR_I2C:
-      return "Erreur communication I2C";
+  Serial.print("Message recu : ");
+  Serial.println(message);
 
-    case ERR_WATCHDOG:
-      return "Watchdog declenche";
+  if (String(topic) == topicLED) {
 
-    case ERR_UNKNOWN:
-      return "Erreur systeme inconnue";
-    case ERR_MQTT_LOST:
-      return "Broker MQTT injoignable";  
+    if (message == "1") {
+      digitalWrite(LED_PIN, HIGH);
+      Serial.println("LED ALLUMEE");
+    }
 
-    default:
-      return "Code erreur non repertorie";
+    else if (message == "0") {
+      digitalWrite(LED_PIN, LOW);
+      Serial.println("LED ETEINTE");
+    }
   }
 }
 
+// ===============================
+// CONNEXION WIFI
+// ===============================
 
-// =====================================
-// INITIALISATION
-// =====================================
+void setupWiFi() {
+
+  Serial.print("Connexion WiFi");
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.println("WiFi connecte !");
+  Serial.println(WiFi.localIP());
+}
+
+// ===============================
+// CONNEXION MQTT
+// ===============================
+
+void reconnect() {
+
+  while (!client.connected()) {
+
+    Serial.print("Connexion MQTT...");
+
+    if (client.connect("ESP32_NUMERO_3")) {
+
+      Serial.println("Connecte !");
+
+      client.subscribe(topicLED);
+
+      Serial.println("Abonne au topic esp32/output");
+
+    } else {
+
+      Serial.print("Echec MQTT, code : ");
+      Serial.println(client.state());
+
+      delay(2000);
+    }
+  }
+}
+
+// ===============================
+// SETUP
+// ===============================
 
 void setup() {
 
   Serial.begin(115200);
 
-  Wire.begin();
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 
-  Serial.println("ESP32 Master initialise");
+  digitalWrite(LED_PIN, LOW);
+
+  setupWiFi();
+
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
 }
 
-
-// =====================================
-// BOUCLE PRINCIPALE
-// =====================================
+// ===============================
+// LOOP
+// ===============================
 
 void loop() {
 
-  delay(2000);
-
-  // Demande d'un seul octet au Slave
-  uint8_t bytesReceived = Wire.requestFrom(
-    (uint8_t)I2C_DEV_ADDR,
-    (uint8_t)1
-  );
-
-  if (bytesReceived == 1 && Wire.available()) {
-
-    // Lecture du code erreur
-    uint8_t receivedCode = Wire.read();
-
-    // Affichage du résultat
-    Serial.println("-----------------------------");
-
-    Serial.print("Code erreur : ");
-    Serial.println(receivedCode);
-
-    Serial.print("Description : ");
-    Serial.println(getErrorMessage(receivedCode));
-
-    Serial.println("-----------------------------");
-
+  if (!client.connected()) {
+    reconnect();
   }
-  else {
 
-    Serial.println("Erreur : aucune reponse du Slave");
+  client.loop();
+
+  // Lecture du bouton
+  int reading = digitalRead(BUTTON_PIN);
+
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
   }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+
+    if (reading != buttonState) {
+
+      buttonState = reading;
+
+      if (buttonState == LOW) {
+
+        client.publish(topicButton, "1");
+        Serial.println("Bouton appuye");
+
+      } else {
+
+        client.publish(topicButton, "0");
+        Serial.println("Bouton relache");
+      }
+    }
+  }
+
+  lastButtonState = reading;
 }
