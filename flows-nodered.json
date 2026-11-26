@@ -1,0 +1,1755 @@
+[
+    {
+        "id": "70b4eb047084ac75",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a1b2c3d4e5f60001",
+        "type": "tab",
+        "label": "Alarme cardiaque",
+        "disabled": true,
+        "info": "Seuil dépassé -> LED ON ; bouton -> acquittement + LED OFF",
+        "env": []
+    },
+    {
+        "id": "hospital_tab",
+        "type": "tab",
+        "label": "Surveillance Patient IoT",
+        "disabled": false,
+        "info": "ESP32 Slave - Raspberry Pi - ESP32 LED"
+    },
+    {
+        "id": "795bf448bb83b6e8",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c20cc05d4cc85dfb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "4dde75a4c8091253",
+        "type": "ui-page",
+        "name": "Page 2",
+        "ui": "795bf448bb83b6e8",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c20cc05d4cc85dfb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "12a7ae44e2642693",
+        "type": "ui-group",
+        "name": "Graphs",
+        "page": "4dde75a4c8091253",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "984e788ac49f87d8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "28e165628fd70b37",
+        "type": "ui-group",
+        "name": "Controls",
+        "page": "4dde75a4c8091253",
+        "width": "2",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "broker_rpi_sante",
+        "type": "mqtt-broker",
+        "name": "Mosquitto (Raspberry Pi)",
+        "broker": "127.0.0.1",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "uitheme_sante",
+        "type": "ui-theme",
+        "name": "Theme Santé",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "uipage_sante",
+        "type": "ui-page",
+        "name": "Surveillance",
+        "ui": "795bf448bb83b6e8",
+        "path": "/surveillance",
+        "icon": "heart-pulse",
+        "layout": "grid",
+        "theme": "uitheme_sante",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 4,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ugrp_mesures",
+        "type": "ui-group",
+        "name": "Mesures du capteur cardiaque",
+        "page": "uipage_sante",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ugrp_alarme",
+        "type": "ui-group",
+        "name": "Alarme et bouton physique",
+        "page": "uipage_sante",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ugrp_controles",
+        "type": "ui-group",
+        "name": "Contrôles",
+        "page": "uipage_sante",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a1b2c3d4e5f60003",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "a1b2c3d4e5f60004",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "795bf448bb83b6e8",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "a1b2c3d4e5f60003",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "a1b2c3d4e5f60006",
+        "type": "ui-group",
+        "name": "Graphique",
+        "page": "a1b2c3d4e5f60004",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a1b2c3d4e5f60005",
+        "type": "ui-group",
+        "name": "Alarme",
+        "page": "a1b2c3d4e5f60004",
+        "width": "6",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a1b2c3d4e5f60007",
+        "type": "mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5b8bdf133382dd0e",
+        "type": "mqtt-broker",
+        "name": "Raspberry Pi MQTT",
+        "broker": "172.18.32.43",
+        "port": "1883",
+        "clientid": "NodeRED_Hospital",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "397e154b9039eed4",
+        "type": "mqtt-broker",
+        "name": "Raspberry Pi MQTT",
+        "broker": "172.18.32.43",
+        "port": "1883",
+        "clientid": "NodeRED_Hospital",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "MQTT Raspberry Pi",
+        "broker": "172.18.32.43",
+        "port": "1883",
+        "clientid": "NodeRED_Patient",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "ui_theme",
+        "type": "ui-theme",
+        "name": "Theme Patient",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#1976d2",
+            "bgPage": "#eef2f6",
+            "groupBg": "#ffffff",
+            "groupOutline": "#dce3eb"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "16px",
+            "groupGap": "16px",
+            "groupBorderRadius": "8px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "ui_page",
+        "type": "ui-page",
+        "name": "Surveillance Patient",
+        "ui": "795bf448bb83b6e8",
+        "path": "/patient",
+        "icon": "heart-pulse",
+        "layout": "grid",
+        "theme": "ui_theme",
+        "order": 2,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "group_dht",
+        "type": "ui-group",
+        "name": "DHT11 - Environnement",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "group_max",
+        "type": "ui-group",
+        "name": "MAX30102 - Surveillance Patient",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "group_alarm",
+        "type": "ui-group",
+        "name": "Alarmes et Diagnostic",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "group_card3",
+        "type": "ui-group",
+        "name": "ESP32 n°3 - LED et Bouton",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "2ec414f7df0ed90e",
+        "type": "ui-chart",
+        "z": "70b4eb047084ac75",
+        "group": "12a7ae44e2642693",
+        "name": "Temperature DHT11",
+        "label": "chart",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 840,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c40f560397de2e8",
+        "type": "mqtt in",
+        "z": "70b4eb047084ac75",
+        "name": "",
+        "topic": "esp32/DHT11/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "984e788ac49f87d8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "2ec414f7df0ed90e"
+            ]
+        ]
+    },
+    {
+        "id": "a0143ad192c60dfe",
+        "type": "mqtt in",
+        "z": "70b4eb047084ac75",
+        "name": "",
+        "topic": "esp32/DHT11/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "984e788ac49f87d8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "c31ccee598653682"
+            ]
+        ]
+    },
+    {
+        "id": "c31ccee598653682",
+        "type": "ui-chart",
+        "z": "70b4eb047084ac75",
+        "group": "12a7ae44e2642693",
+        "name": "Humidity DHT11",
+        "label": "chart",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 820,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5220ac44b5d45292",
+        "type": "mqtt out",
+        "z": "70b4eb047084ac75",
+        "name": "",
+        "topic": "esp32/output",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "984e788ac49f87d8",
+        "x": 1050,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "af58418f58e393a0",
+        "type": "ui-switch",
+        "z": "70b4eb047084ac75",
+        "name": "LED status",
+        "label": "switch",
+        "group": "28e165628fd70b37",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "flow",
+        "style": "",
+        "className": "",
+        "layout": "row-spread",
+        "clickableArea": "switch",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 830,
+        "y": 480,
+        "wires": [
+            [
+                "5220ac44b5d45292"
+            ]
+        ]
+    },
+    {
+        "id": "ef690e1b57029f67",
+        "type": "mqtt in",
+        "z": "70b4eb047084ac75",
+        "name": "",
+        "topic": "esp32/button1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "984e788ac49f87d8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "537280e697f5fc5a"
+            ]
+        ]
+    },
+    {
+        "id": "537280e697f5fc5a",
+        "type": "function",
+        "z": "70b4eb047084ac75",
+        "name": "function 1",
+        "func": "if (msg.payload == \"down\") {\n    msg.payload = \"on\";\n} else if (msg.payload == \"up\") {\n    msg.payload = \"off\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 480,
+        "wires": [
+            [
+                "af58418f58e393a0"
+            ]
+        ]
+    },
+    {
+        "id": "96db8fa6d05f0b48",
+        "type": "inject",
+        "z": "70b4eb047084ac75",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "0ec5a8c530a047fc"
+            ]
+        ]
+    },
+    {
+        "id": "0ec5a8c530a047fc",
+        "type": "debug",
+        "z": "70b4eb047084ac75",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60050",
+        "type": "comment",
+        "z": "a1b2c3d4e5f60001",
+        "name": "1) Rythme cardiaque -> seuil -> LED ON",
+        "info": "",
+        "x": 230,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60010",
+        "type": "mqtt in",
+        "z": "a1b2c3d4e5f60001",
+        "name": "",
+        "topic": "esp32/heartrate",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "984e788ac49f87d8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "a1b2c3d4e5f60011"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60011",
+        "type": "function",
+        "z": "a1b2c3d4e5f60001",
+        "name": "Analyse BPM / seuil",
+        "func": "const bpm = Number(msg.payload);\nif (isNaN(bpm) || bpm <= 0) {\n    return null; // mesure invalide (capteur sans doigt, etc.)\n}\nconst seuil = flow.get('seuil') || 100;\nconst alarme = flow.get('alarme') || false;\nconst acquitte = flow.get('acquitte') || false;\n\nconst sortieBpm = { payload: bpm };\nlet sortieEtat = null;\nlet sortieLed = null;\n\nif (bpm > seuil) {\n    // Seuil dépassé : on déclenche seulement si pas déjà en alarme ET pas déjà acquittée\n    if (!alarme && !acquitte) {\n        flow.set('alarme', true);\n        sortieEtat = { payload: 'ALARME : ' + bpm + ' bpm' };\n        sortieLed = { payload: 'on' };\n    }\n} else {\n    // Retour à la normale : on réarme tout et on éteint la LED\n    if (alarme || acquitte) {\n        flow.set('alarme', false);\n        flow.set('acquitte', false);\n        sortieEtat = { payload: 'Normal' };\n        sortieLed = { payload: 'off' };\n    }\n}\nreturn [sortieBpm, sortieEtat, sortieLed];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "a1b2c3d4e5f60013",
+                "a1b2c3d4e5f60012"
+            ],
+            [
+                "a1b2c3d4e5f60014"
+            ],
+            [
+                "a1b2c3d4e5f60015"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60013",
+        "type": "ui-chart",
+        "z": "a1b2c3d4e5f60001",
+        "group": "a1b2c3d4e5f60006",
+        "name": "Rythme cardiaque",
+        "label": "Rythme cardiaque (bpm)",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "bpm",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "",
+        "interpolation": "linear",
+        "x": 600,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60012",
+        "type": "ui-text",
+        "z": "a1b2c3d4e5f60001",
+        "group": "a1b2c3d4e5f60005",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "BPM actuel",
+        "label": "BPM",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60014",
+        "type": "ui-text",
+        "z": "a1b2c3d4e5f60001",
+        "group": "a1b2c3d4e5f60005",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Etat alarme",
+        "label": "Etat",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60015",
+        "type": "mqtt out",
+        "z": "a1b2c3d4e5f60001",
+        "name": "LED (esp32/output)",
+        "topic": "esp32/output",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "984e788ac49f87d8",
+        "x": 620,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60051",
+        "type": "comment",
+        "z": "a1b2c3d4e5f60001",
+        "name": "2) Bouton -> acquittement + LED OFF",
+        "info": "",
+        "x": 230,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60020",
+        "type": "mqtt in",
+        "z": "a1b2c3d4e5f60001",
+        "name": "",
+        "topic": "esp32/button1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "984e788ac49f87d8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "a1b2c3d4e5f60021"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60021",
+        "type": "function",
+        "z": "a1b2c3d4e5f60001",
+        "name": "Bouton = acquitter",
+        "func": "const etat = String(msg.payload);\nconst precedent = flow.get('btnPrecedent') || 'up';\nflow.set('btnPrecedent', etat);\n\n// Le bouton envoie \"down\"/\"up\" toutes les secondes :\n// on réagit uniquement au moment de l'appui (up -> down)\nif (etat === 'down' && precedent !== 'down') {\n    if (flow.get('alarme')) {\n        flow.set('alarme', false);\n        flow.set('acquitte', true);\n        return [{ payload: 'off' }, { payload: 'Alarme acquittée (bouton)' }];\n    }\n}\nreturn null;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 400,
+        "wires": [
+            [
+                "a1b2c3d4e5f60015"
+            ],
+            [
+                "a1b2c3d4e5f60014"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60052",
+        "type": "comment",
+        "z": "a1b2c3d4e5f60001",
+        "name": "3) Réglage du seuil (dashboard)",
+        "info": "",
+        "x": 220,
+        "y": 470,
+        "wires": []
+    },
+    {
+        "id": "a1b2c3d4e5f60030",
+        "type": "ui-slider",
+        "z": "a1b2c3d4e5f60001",
+        "group": "a1b2c3d4e5f60005",
+        "name": "Seuil BPM",
+        "label": "Seuil BPM",
+        "tooltip": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": "always",
+        "showTicks": "always",
+        "min": 60,
+        "max": 180,
+        "step": 1,
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "a1b2c3d4e5f60031"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f60031",
+        "type": "function",
+        "z": "a1b2c3d4e5f60001",
+        "name": "Enregistrer seuil",
+        "func": "flow.set('seuil', Number(msg.payload));\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "flow.set('seuil', flow.get('seuil') || 100);",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_temp",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Temperature DHT11",
+        "topic": "esp32/DHT11/temperature",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "gauge_temp"
+            ]
+        ]
+    },
+    {
+        "id": "gauge_temp",
+        "type": "ui-gauge",
+        "z": "hospital_tab",
+        "name": "Temperature DHT11",
+        "group": "group_dht",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 6,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Temperature ambiante",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "thermometer",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#36a852"
+            },
+            {
+                "from": "25",
+                "color": "#e6b800"
+            },
+            {
+                "from": "37",
+                "color": "#dc3545"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 450,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_humidity",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Humidite DHT11",
+        "topic": "esp32/DHT11/humidity",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "gauge_humidity"
+            ]
+        ]
+    },
+    {
+        "id": "gauge_humidity",
+        "type": "ui-gauge",
+        "z": "hospital_tab",
+        "name": "Humidite DHT11",
+        "group": "group_dht",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 6,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Humidite",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "water-percent",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#36a852"
+            },
+            {
+                "from": "40",
+                "color": "#e6b800"
+            },
+            {
+                "from": "70",
+                "color": "#dc3545"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 450,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_spo2",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "SpO2 MAX30102",
+        "topic": "esp32/MAX30102/spo2",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "be1b7383b05079fc"
+            ]
+        ]
+    },
+    {
+        "id": "gauge_spo2",
+        "type": "ui-gauge",
+        "z": "hospital_tab",
+        "name": "SpO2",
+        "group": "group_max",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 6,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Saturation en oxygene",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "heart-pulse",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#dc3545",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "90",
+                "color": "#e6b800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "95",
+                "color": "#36a852",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 670,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_hr",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Frequence cardiaque",
+        "topic": "esp32/MAX30102/heartRate",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "function_hr"
+            ]
+        ]
+    },
+    {
+        "id": "function_hr",
+        "type": "function",
+        "z": "hospital_tab",
+        "name": "Controle du seuil 100 BPM",
+        "func": "\nconst seuil = 100;\n\n// Chien de garde : aucune donnée pendant 12 secondes\nconst ancien = context.get('wd');\nif (ancien) clearTimeout(ancien);\n\ncontext.set('wd', setTimeout(function () {\n    flow.set('alarme', false);\n    flow.set('acquitte', false);\n\n    node.send([\n        { payload: 0 },\n        { payload: '0' },\n        { payload: 'Aucune donnee recue du capteur (slave hors ligne ?)' }\n    ]);\n}, 12000));\n\nconst bpm = Number(msg.payload);\n\n// Vérification de la mesure\nif (!Number.isFinite(bpm) || bpm < 30 || bpm > 220) {\n\n    let compteur = context.get('invalidCount') || 0;\n    compteur++;\n\n    context.set('invalidCount', compteur);\n\n    // Une seule lecture invalide : on attend la prochaine\n    if (compteur < 2) {\n        return null;\n    }\n\n    // Deux lectures invalides consécutives\n    flow.set('alarme', false);\n    flow.set('acquitte', false);\n\n    return [\n        { payload: 0 },\n        { payload: '0' },\n        { payload: 'En attente de mesure (pas de doigt sur le capteur)' }\n    ];\n}\n\n// Une mesure valide : remise à zéro du compteur\ncontext.set('invalidCount', 0);\n\n// BPM normal\nif (bpm <= seuil) {\n    flow.set('alarme', false);\n    flow.set('acquitte', false);\n\n    return [\n        { payload: bpm },\n        { payload: '0' },\n        { payload: 'Pas de depassement du seuil configure' }\n    ];\n}\n\n// Seuil dépassé, mais alarme acquittée\nif (flow.get('acquitte')) {\n    return [\n        { payload: bpm },\n        { payload: '0' },\n        { payload: 'Alarme acquittee par le bouton (' + bpm + ' BPM)' }\n    ];\n}\n\n// Déclenchement de l'alarme\nflow.set('alarme', true);\n\nreturn [\n    { payload: bpm },\n    { payload: '1' },\n    { payload: 'ALERTE : Frequence cardiaque superieure a ' + seuil + ' BPM' }\n];\n",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "gauge_hr"
+            ],
+            [
+                "mqtt_led3"
+            ],
+            [
+                "text_alarm"
+            ]
+        ]
+    },
+    {
+        "id": "gauge_hr",
+        "type": "ui-gauge",
+        "z": "hospital_tab",
+        "name": "Frequence cardiaque",
+        "group": "group_max",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 6,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Frequence cardiaque",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "BPM",
+        "icon": "heart-pulse",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#36a852"
+            },
+            {
+                "from": "60",
+                "color": "#e6b800"
+            },
+            {
+                "from": "100",
+                "color": "#dc3545"
+            }
+        ],
+        "min": 0,
+        "max": "180",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 750,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_max_temp",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Temperature MAX30102",
+        "topic": "esp32/MAX30102/temperature",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "gauge_max_temp"
+            ]
+        ]
+    },
+    {
+        "id": "gauge_max_temp",
+        "type": "ui-gauge",
+        "z": "hospital_tab",
+        "name": "Temperature MAX30102",
+        "group": "group_max",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 6,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Temperature du capteur MAX30102",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "thermometer",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#36a852"
+            },
+            {
+                "from": "30",
+                "color": "#e6b800"
+            },
+            {
+                "from": "40",
+                "color": "#dc3545"
+            }
+        ],
+        "min": 0,
+        "max": "60",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 480,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_led3",
+        "type": "mqtt out",
+        "z": "hospital_tab",
+        "name": "Commande LED ESP32 n°3",
+        "topic": "esp32/output",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 1100,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "text_alarm",
+        "type": "ui-text",
+        "z": "hospital_tab",
+        "group": "group_alarm",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "Etat alarme",
+        "label": "Etat du patient",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": true,
+        "font": "",
+        "fontSize": "18",
+        "color": "#dc3545",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "mqtt_error",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Code erreur Slave",
+        "topic": "esp32/error",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 560,
+        "wires": [
+            [
+                "function_error"
+            ]
+        ]
+    },
+    {
+        "id": "function_error",
+        "type": "function",
+        "z": "hospital_tab",
+        "name": "Traduction des codes erreur",
+        "func": "let code = Number(msg.payload);\nlet errors = {\n0: '0 - Aucun probleme',\n1: '1 - WiFi deconnecte',\n2: '2 - Capteur deconnecte',\n3: '3 - Erreur de lecture capteur',\n4: '4 - Limite temperature depassee',\n5: '5 - Tension faible',\n6: '6 - Liaison serie perdue',\n7: '7 - Memoire faible',\n8: '8 - Erreur I2C',\n9: '9 - Watchdog',\n10: '10 - Erreur inconnue'\n};\nmsg.payload = errors[code] || 'Code erreur inconnu : ' + code;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 560,
+        "wires": [
+            [
+                "text_error"
+            ]
+        ]
+    },
+    {
+        "id": "text_error",
+        "type": "ui-text",
+        "z": "hospital_tab",
+        "group": "group_alarm",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Diagnostic Slave",
+        "label": "Diagnostic ESP32 Slave",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": true,
+        "font": "",
+        "fontSize": "16",
+        "color": "#1976d2",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 760,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "mqtt_button3",
+        "type": "mqtt in",
+        "z": "hospital_tab",
+        "name": "Bouton ESP32 n°3",
+        "topic": "esp32/button",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 660,
+        "wires": [
+            [
+                "function_button3"
+            ]
+        ]
+    },
+    {
+        "id": "function_button3",
+        "type": "function",
+        "z": "hospital_tab",
+        "name": "Etat du bouton",
+        "func": "const v = String(msg.payload).trim().toLowerCase();\nconst appuye = (v === '1' || v === 'true' || v === 'down' || v === 'pressed');\n\nconst precedent = flow.get('btnPrecedent') || false;\nflow.set('btnPrecedent', appuye);\n\nconst sortieTexte = { payload: appuye ? 'BOUTON APPUYE' : 'BOUTON RELACHE' };\n\n// Notification seulement au moment de l'appui\nlet sortieNotif = null;\nif (appuye && !precedent) {\n    sortieNotif = { payload: 'Le patient a appuye sur le bouton !' };\n}\n\nreturn [sortieTexte, sortieNotif];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 660,
+        "wires": [
+            [
+                "text_button3"
+            ],
+            [
+                "2d671191451e8e2e"
+            ]
+        ]
+    },
+    {
+        "id": "text_button3",
+        "type": "ui-text",
+        "z": "hospital_tab",
+        "group": "group_card3",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "Etat bouton",
+        "label": "Etat du bouton",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": true,
+        "font": "",
+        "fontSize": "18",
+        "color": "#1976d2",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 760,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "fb5d2be884911256",
+        "type": "debug",
+        "z": "hospital_tab",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "be1b7383b05079fc",
+        "type": "function",
+        "z": "hospital_tab",
+        "name": "lien spo",
+        "func": "const v = Number(msg.payload);\nmsg.payload = (Number.isFinite(v) && v > 0 && v <= 100) ? v : 0;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "gauge_spo2"
+            ]
+        ]
+    },
+    {
+        "id": "2d671191451e8e2e",
+        "type": "ui-notification",
+        "z": "hospital_tab",
+        "ui": "795bf448bb83b6e8",
+        "position": "top right",
+        "colorDefault": true,
+        "color": "#000000",
+        "displayTime": "5",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Surveillance Patient",
+        "x": 780,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89d8436a115ad50a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.36.1"
+        }
+    }
+]
